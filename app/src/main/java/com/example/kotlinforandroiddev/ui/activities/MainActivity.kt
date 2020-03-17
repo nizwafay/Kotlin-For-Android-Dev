@@ -1,9 +1,11 @@
-package com.example.kotlinforandroiddev
+package com.example.kotlinforandroiddev.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlinforandroiddev.R
+import com.example.kotlinforandroiddev.ui.adapters.ForecastListAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
