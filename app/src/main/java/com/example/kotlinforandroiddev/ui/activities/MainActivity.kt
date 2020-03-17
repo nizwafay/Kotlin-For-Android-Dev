@@ -2,10 +2,15 @@ package com.example.kotlinforandroiddev.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinforandroiddev.R
+import com.example.kotlinforandroiddev.data.WeatherApi
 import com.example.kotlinforandroiddev.ui.adapters.ForecastListAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -33,5 +38,15 @@ class MainActivity : AppCompatActivity() {
             layoutManager = viewManager
             adapter = viewAdapter
         }
+
+        WeatherApi.retrofitService.getDailyWeather().enqueue( object: Callback<String> {
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.d("MainActivity", "Failure: " + t.message)
+            }
+
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                Log.d("MainActivity", "Success: " + response.body())
+            }
+        })
     }
 }
