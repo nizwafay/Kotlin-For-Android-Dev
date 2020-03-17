@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinforandroiddev.R
+import com.example.kotlinforandroiddev.data.ForecastResult
 import com.example.kotlinforandroiddev.data.WeatherApi
 import com.example.kotlinforandroiddev.ui.adapters.ForecastListAdapter
 import retrofit2.Call
@@ -39,13 +40,13 @@ class MainActivity : AppCompatActivity() {
             adapter = viewAdapter
         }
 
-        WeatherApi.retrofitService.getDailyWeather().enqueue( object: Callback<String> {
-            override fun onFailure(call: Call<String>, t: Throwable) {
+        WeatherApi.retrofitService.getDailyWeather("94043").enqueue( object: Callback<ForecastResult> {
+            override fun onFailure(call: Call<ForecastResult>, t: Throwable) {
                 Log.d("MainActivity", "Failure: " + t.message)
             }
 
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                Log.d("MainActivity", "Success: " + response.body())
+            override fun onResponse(call: Call<ForecastResult>, response: Response<ForecastResult>) {
+                Log.d("MainActivity", "Success: " + response.body()?.city)
             }
         })
     }
