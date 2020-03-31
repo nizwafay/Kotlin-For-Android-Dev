@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinforandroiddev.R
+import com.example.kotlinforandroiddev.data.ForecastResult
 import com.example.kotlinforandroiddev.data.WeatherApi
 import com.example.kotlinforandroiddev.domain.commands.RequestForecastCommand
 import com.example.kotlinforandroiddev.ui.adapters.ForecastListAdapter

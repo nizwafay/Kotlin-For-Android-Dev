@@ -5,8 +5,10 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
-private const val BASE_URL = "http://api.openweathermap.org/"
+private const val BASE_URL = "http://api.openweathermap.org/data/2.5/"
+private const val APP_ID = "15646a06818f61f7b8d7823ca833e1ce"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
