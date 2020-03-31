@@ -2,15 +2,16 @@ package com.example.kotlinforandroiddev.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinforandroiddev.R
 import com.example.kotlinforandroiddev.data.WeatherApi
 import com.example.kotlinforandroiddev.ui.adapters.ForecastListAdapter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -39,14 +40,19 @@ class MainActivity : AppCompatActivity() {
             adapter = viewAdapter
         }
 
-        WeatherApi.retrofitService.getDailyWeather().enqueue( object: Callback<String> {
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("MainActivity", "Failure: " + t.message)
-            }
+        val url = "http://api.openweathermap.org/data/2.5/forecast/daily?" +
+                "APPID=15646a06818f61f7b8d7823ca833e1ce&zip=94043&mode=json&units=metric&cnt=7"
 
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                Log.d("MainActivity", "Success: " + response.body())
-            }
-        })
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val dailyWeather = getDailyWeather()
+            Toast.makeText(this@MainActivity, dailyWeather, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private suspend fun getDailyWeather(): String {
+        return withContext(Dispatchers.IO) {
+            WeatherApi.service.getDailyWeather()
+        }
     }
 }
