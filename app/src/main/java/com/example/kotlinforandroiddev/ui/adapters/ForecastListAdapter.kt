@@ -3,8 +3,9 @@ package com.example.kotlinforandroiddev.ui.adapters
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlinforandroiddev.domain.model.ForecastList
 
-class ForecastListAdapter(private val items: List<String>):
+class ForecastListAdapter(private val items: ForecastList):
         RecyclerView.Adapter<ForecastListAdapter.ForecastViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
         return ForecastViewHolder(
@@ -12,10 +13,13 @@ class ForecastListAdapter(private val items: List<String>):
         )
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = items.size()
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
-        holder.textView.text = items[position]
+        with(items[position]) {
+            holder.textView.text = "$date - $description - $high/$low"
+        }
+
     }
 
     class ForecastViewHolder(val textView: TextView): RecyclerView.ViewHolder(textView)
