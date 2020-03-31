@@ -13,10 +13,10 @@ class ForecastListAdapter(private val items: ForecastList):
         )
     }
 
-    override fun getItemCount(): Int = items.dailyForecast.size
+    override fun getItemCount(): Int = items.size()
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
-        with(items.dailyForecast[position]) {
+        with(items[position]) {
             holder.textView.text = "$date - $description - $high/$low"
         }
 
