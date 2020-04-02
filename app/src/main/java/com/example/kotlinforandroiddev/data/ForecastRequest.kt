@@ -20,9 +20,8 @@ private val retrofit = Retrofit.Builder()
         .build()
 
 interface WeatherApiService {
-    @GET("data/2.5/forecast/daily?" +
-            "APPID=15646a06818f61f7b8d7823ca833e1ce&zip=94043&mode=json&units=metric&cnt=7")
-    suspend fun getDailyWeather(@Query("q") zipCode: String): ForecastResult
+    @GET("forecast/daily?mode=json&units=metric&cnt=7&APPID=$APP_ID")
+    suspend fun getDailyWeather(@Query("zip") zipCode: String): ForecastResult
 }
 
 object WeatherApi {

@@ -6,14 +6,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinforandroiddev.R
-import com.example.kotlinforandroiddev.data.ForecastResult
-import com.example.kotlinforandroiddev.data.WeatherApi
 import com.example.kotlinforandroiddev.domain.commands.RequestForecastCommand
+import com.example.kotlinforandroiddev.domain.model.Forecast
 import com.example.kotlinforandroiddev.ui.adapters.ForecastListAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -28,7 +26,13 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val dailyWeather = RequestForecastCommand("94043").execute()
-            forecastList.adapter = ForecastListAdapter(dailyWeather)
+            forecastList.adapter = ForecastListAdapter(dailyWeather,
+                object : ForecastListAdapter.OnItemClickListener {
+                    override fun invoke(forecast: Forecast) {
+                        Toast.makeText(this@MainActivity, forecast.date, Toast.LENGTH_LONG).show()
+                    }
+                }
+            )
         }
     }
 }

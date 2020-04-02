@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 data class Forecast(
     val clouds: Int,
     val deg: Int,
-    val dt: Int,
+    val dt: Long,
     @Json(name = "feels_like")
     val feelsLike: FeelsLike,
     val humidity: Int,
