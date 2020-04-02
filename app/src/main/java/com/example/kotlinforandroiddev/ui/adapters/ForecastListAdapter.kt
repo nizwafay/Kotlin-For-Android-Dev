@@ -22,7 +22,7 @@ class ForecastListAdapter(
         return ForecastViewHolder(view, onClick)
     }
 
-    override fun getItemCount(): Int = items.size()
+    override fun getItemCount() = items.size()
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
         holder.bind(items[position])
