@@ -13,7 +13,7 @@ import com.example.kotlinforandroiddev.domain.model.ForecastList
 
 class ForecastListAdapter(
     private val items: ForecastList,
-    private val onClick: OnItemClickListener
+    private val onClick: (Forecast) -> Unit
 ): RecyclerView.Adapter<ForecastListAdapter.ForecastViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -30,7 +30,7 @@ class ForecastListAdapter(
 
     class ForecastViewHolder(
         private val view: View,
-        private val itemClick: OnItemClickListener
+        private val itemClick: (Forecast) -> Unit
     ): RecyclerView.ViewHolder(view) {
 
         private val iconView: ImageView = view.findViewById(R.id.icon)
@@ -49,9 +49,5 @@ class ForecastListAdapter(
                 itemView.setOnClickListener { itemClick(this) }
             }
         }
-    }
-
-    interface OnItemClickListener {
-        operator fun invoke(forecast: Forecast)
     }
 }

@@ -26,13 +26,9 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val dailyWeather = RequestForecastCommand("94043").execute()
-            forecastList.adapter = ForecastListAdapter(dailyWeather,
-                object : ForecastListAdapter.OnItemClickListener {
-                    override fun invoke(forecast: Forecast) {
-                        Toast.makeText(this@MainActivity, forecast.date, Toast.LENGTH_LONG).show()
-                    }
-                }
-            )
+            forecastList.adapter = ForecastListAdapter(dailyWeather) {
+                Toast.makeText(this@MainActivity, it.date, Toast.LENGTH_LONG).show()
+            }
         }
     }
 }
