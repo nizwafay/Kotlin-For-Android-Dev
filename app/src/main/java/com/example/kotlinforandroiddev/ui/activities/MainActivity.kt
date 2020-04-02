@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlinforandroiddev.R
 import com.example.kotlinforandroiddev.domain.commands.RequestForecastCommand
-import com.example.kotlinforandroiddev.domain.model.Forecast
 import com.example.kotlinforandroiddev.ui.adapters.ForecastListAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         viewManager = LinearLayoutManager(this)
 
-        val forecastList = findViewById<RecyclerView>(R.id.forecast_list)
         forecastList.layoutManager = viewManager
 
         GlobalScope.launch(Dispatchers.Main) {
